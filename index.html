@@ -92,7 +92,7 @@
                         </li>
 
                         <li>
-                            <a href="mailto:ofcissac@gmail.com" aria-label="메일">
+                            <a href="mailto:ofcissac@gmail.com" aria-label="메일" onclick="emailHandler(event)">
                                <i class="fa fa-envelope" aria-hidden="true" style="margin: 12px;"></i>
                             </a>
                         </li>
@@ -130,6 +130,26 @@
         })(document, window, '//analytics.example.com/tracker.js', 'fathom');
         fathom('set', 'siteId', 'ABCDE');
         fathom('trackPageview');
+
+        function emailHandler(event) {
+            var userAgent = navigator.userAgent;
+            if (userAgent.indexOf('Mac') !== -1) {
+                window.location.href = "mailto:ofcissac@gmail.com";
+            } else if (userAgent.indexOf('Win') !== -1) {
+                copyToClipboard("ofcissac@gmail.com");
+                alert("문의 이메일이 복사되었습니다")
+            }
+            event.preventDefault();
+        }
+
+        function copyToClipboard(text) {
+            var textField = document.createElement('textarea');
+            textField.innerText = text;
+            document.body.appendChild(textField);
+            textField.select();
+            document.execCommand('copy');
+            textField.remove();
+        }
     </script>
 
     <script async defer data-domain="example.com" src="https://analytics.example.com/js/plausible.js"></script>
